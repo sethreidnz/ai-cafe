@@ -1,0 +1,24 @@
+{
+  "name": "ai-cafe-server",
+  "version": "1.0.0",
+  "description": "Server project for A.I. Cafe",
+  "main": "index.js",
+  "dependencies": {
+    "documentdb": "^1.14.2",
+    "documentdb-q-promises": "^1.6.0",
+    "dotenv": "^5.0.1",
+    "eslint": "^4.19.1",
+    "koa": "^2.5.0",
+    "koa-body": "^2.5.0",
+    "koa-router": "^7.4.0",
+    "uuid": "^3.2.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.17.2"
+  },
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "author": "Seth Reid",
+  "license": "MIT"
+}
