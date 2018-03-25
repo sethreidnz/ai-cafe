@@ -1,4 +1,4 @@
-class DatabaseCollectionService {
+export class DatabaseCollectionService {
   constructor(documentClient, databaseId, collectionId) {
     this.documentClient = documentClient;
     this.databaseId = databaseId;
@@ -14,7 +14,7 @@ class DatabaseCollectionService {
   }
 
   async ensureCollectionExists() {
-    if(this.collection) return;
+    if (this.collection) return;
     await this.init();
   }
 
@@ -22,14 +22,15 @@ class DatabaseCollectionService {
     try {
       const collection = await this.getOrCreateCollection(
         this.databaseId,
-        this.collectionId
+        this.collectionId,
       );
       this.collection = collection;
+      return this;
     } catch (error) {
       console.error(
         `Error initializing database collection service for database: '${
           this.databaseId
-        }', collectionId: '${this.collectionId}'`
+        }', collectionId: '${this.collectionId}'`,
       );
       console.log(error);
     }
@@ -45,7 +46,7 @@ class DatabaseCollectionService {
 
   async createDatabase(databaseId) {
     const databaseResponse = await this.documentClient.createDatabaseAsync({
-      id: databaseId
+      id: databaseId,
     });
     return databaseResponse.resource;
   }
@@ -53,13 +54,13 @@ class DatabaseCollectionService {
   async getDatabase(databaseId) {
     let result;
     const querySpec = {
-      query: "SELECT * FROM root r WHERE  r.id = @id",
+      query: 'SELECT * FROM root r WHERE  r.id = @id',
       parameters: [
         {
-          name: "@id",
-          value: databaseId
-        }
-      ]
+          name: '@id',
+          value: databaseId,
+        },
+      ],
     };
     const queryIterator = await this.documentClient.queryDatabases(querySpec);
     const results = await queryIterator.toArrayAsync();
@@ -70,8 +71,8 @@ class DatabaseCollectionService {
     const databaseResponse = await this.documentClient.createCollectionAsync(
       databaseLink,
       {
-        id: collectionId
-      }
+        id: collectionId,
+      },
     );
     return databaseResponse.response;
   }
@@ -87,29 +88,29 @@ class DatabaseCollectionService {
 
   async getCollection(databaseLink, collectionId) {
     let result;
-    let querySpec = {
-      query: "SELECT * FROM root r WHERE r.id=@id",
+    const querySpec = {
+      query: 'SELECT * FROM root r WHERE r.id=@id',
       parameters: [
         {
-          name: "@id",
-          value: collectionId
-        }
-      ]
+          name: '@id',
+          value: collectionId,
+        },
+      ],
     };
     const queryIterator = await this.documentClient.queryCollections(
       databaseLink,
-      querySpec
+      querySpec,
     );
     const results = await queryIterator.toArrayAsync();
     return results.feed.length !== 0 ? results.feed[0] : null;
   }
 
-  async getAll(querySpec) {
+  async getAll() {
     await this.ensureCollectionExists();
-    const results = await this.find("SELECT * from c");
+    const results = await this.find('SELECT * from c');
     return results;
   }
-  
+
   async find(querySpec) {
     await this.ensureCollectionExists();
     const queryIterator = await this.documentClient.queryDocuments(this.collection._self, querySpec);
@@ -119,19 +120,21 @@ class DatabaseCollectionService {
 
   async addItem(item) {
     await this.ensureCollectionExists();
-    return await this.documentClient.createDocumentAsync(this.collection._self, item);;
+    await this.documentClient.createDocumentAsync(this.collection._self, item);
+    return item;
   }
 
   async upsertItem(updatedItem) {
     await this.ensureCollectionExists();
-    return await this.documentClient.upsertDocumentAsync(this.collection._self, updatedItem);;
+    await this.documentClient.upsertDocumentAsync(this.collection._self, updatedItem);
+    return updatedItem;
   }
 
   async getItem(itemId) {
     await this.ensureCollectionExists();
-    let querySpec = {
-      query: "SELECT * FROM root r WHERE r.id = @id",
-      parameters: [{ name: "@id", value: itemId }]
+    const querySpec = {
+      query: 'SELECT * FROM root r WHERE r.id = @id',
+      parameters: [{ name: '@id', value: itemId }],
     };
     const queryIterator = await this.documentClient.queryDocuments(this.collection._self, querySpec);
     const results = await queryIterator.toArrayAsync();
@@ -142,12 +145,8 @@ class DatabaseCollectionService {
     await this.ensureCollectionExists();
     const currentItem = await this.getItem(itemId);
     if (!currentItem) {
-        throw new Error(`Cannot delete item ${itemId} because it doesn't exist.`);
+      throw new Error(`Cannot delete item ${itemId} because it doesn't exist.`);
     }
     return await this.documentClient.deleteDocumentAsync(currentItem._self);
   }
-}
-
-module.exports = {
- DatabaseCollectionService
 }
