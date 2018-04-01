@@ -38,6 +38,7 @@ export class DatabaseCollectionService {
 
   async getOrCreateDatabase(databaseId) {
     let database = await this.getDatabase(databaseId);
+    console.log("database get or craete")
     if (!database) {
       database = this.createDatabase(databaseId);
     }
@@ -106,6 +107,7 @@ export class DatabaseCollectionService {
   }
 
   async getAll() {
+    console.log("getAll called");
     await this.ensureCollectionExists();
     const results = await this.find('SELECT * from c');
     return results;

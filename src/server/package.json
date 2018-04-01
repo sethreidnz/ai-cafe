@@ -31,6 +31,8 @@
     "uuid": "^3.2.1"
   },
   "dependencies": {
+    "botbuilder-azure": "^3.0.4",
+    "koa": "^2.5.0",
     "restify": "^4.3.0"
   }
 }
