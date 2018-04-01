@@ -1,3 +1,5 @@
+const uuidv4 = require("uuid/v4");
+
 export class DatabaseCollectionService {
   constructor(documentClient, databaseId, collectionId) {
     this.documentClient = documentClient;
@@ -38,7 +40,6 @@ export class DatabaseCollectionService {
 
   async getOrCreateDatabase(databaseId) {
     let database = await this.getDatabase(databaseId);
-    console.log("database get or craete")
     if (!database) {
       database = this.createDatabase(databaseId);
     }
@@ -107,7 +108,6 @@ export class DatabaseCollectionService {
   }
 
   async getAll() {
-    console.log("getAll called");
     await this.ensureCollectionExists();
     const results = await this.find('SELECT * from c');
     return results;
@@ -122,6 +122,7 @@ export class DatabaseCollectionService {
 
   async addItem(item) {
     await this.ensureCollectionExists();
+    item.id = uuidv4();
     await this.documentClient.createDocumentAsync(this.collection._self, item);
     return item;
   }

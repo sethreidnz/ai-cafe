@@ -1,8 +1,18 @@
-import restify from 'restify';
-import routes from './routes';
+import Koa from 'koa';
+import koaBody from 'koa-body';
+import KoaRouter from 'koa-router';
+import createRoutes from './routes';
 
-const server = restify.createServer({ name: 'api' });
-server.use(restify.plugins.bodyParser());
-routes(server);
-server.listen(5000);
-module.exports = server;
+// configure the routes
+const router = new KoaRouter();
+createRoutes(router);
+
+// configure the app
+var app = new Koa();
+app
+  .use(koaBody())
+  .use(router.routes())
+  .use(router.allowedMethods())
+  .listen(5000);
+
+module.exports = app;

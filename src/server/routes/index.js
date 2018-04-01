@@ -1,7 +1,10 @@
 import orders from './orders';
 import messages from './messages';
+import reservations from './reservations';
 
-export default(server) => {
-  orders(server);
-  messages(server);
+export default (router) => {
+  messages(router);
+  orders(router);
+  reservations(router);
+  return router;
 };

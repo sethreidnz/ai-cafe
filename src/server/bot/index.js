@@ -5,6 +5,7 @@ dotenv.config()
 import { DATABASE_NAME, BOT_DATA_COLLECTION_NAME } from '../database/contants'
 import { RESERVATION_DIALOG_NAME } from './dialogs/reservation';
 import createDialogs from './dialogs';
+import { KoaChatConnector } from './koa-chat-connector';
 
 var documentDbOptions = {
     host: process.env.COSMOSDB_HOST, 
@@ -14,7 +15,7 @@ var documentDbOptions = {
 };
 
 // Configure the connector
-export const connector = new builder.ChatConnector({
+export const connector = new KoaChatConnector({
   appId: process.env.MicrosoftAppId,
   appPassword: process.env.MicrosoftAppPassword
 });

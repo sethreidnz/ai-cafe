@@ -1,38 +1,34 @@
 const uuidv4 = require("uuid/v4");
 const { orderService } = require("../database");
 
-export default server => {
-  server.get("/api/orders", (req, res, next) => {
-    orderService.getAll().then(allOrders => {
-      res.send(allOrders);
-      return next();
-    });
+export default router => {
+  router.get('/api/orders', async (ctx, next) => {
+    const allOrders = await orderService.getAll("SELECT * FROM Orders");
+    ctx.body = allOrders
   });
-  server.post("/orders", (req, res, next) => {
-    const order = req.body;
-    order.id = uuidv4();
-    orderService.upsertItem(order).then(order => {
-      res.status(200);
-      res.send(order.id);
-      return next();
-    });
+  
+  router.get('/api/orders/:id', async (ctx, next) => {
+    const itemId = ctx.params.id;
+    const order = await orderService.getItem(itemId);
+    ctx.body = order
   });
-  server.put("/orders/:id", (req, res, next) => {
-    const order = req.body;
-    order.id = req.params.idl;
-    orderService.upsertItem(order).then(order => {
-      res.status(200);
-      res.send(order.id);
-      return next();
-    });
+  
+  router.post('/orders', async (ctx, next) => {
+    const order = ctx.request.body;s
+    await orderService.createItem(updatedOrder);
+    ctx.status = 200;
   });
-  server.del("/orders/:id", (req, res, next) => {
-    const itemId = req.params.id;
-    console.log(itemId);
-    orderService.deleteItem(itemId).then(() => {
-      res.status(200);
-      res.send();
-      return next();
-    });
+  
+  router.put('/api/orders/:id', async (ctx, next) => {
+    const itemId = ctx.params.id;
+    const updatedOrder = ctx.request.body;
+    await orderService.upsertItem(updatedOrder);
+    ctx.status = 200;
+  });
+  
+  router.delete('/api/orders/:id', async (ctx, next) => {
+    const itemId = ctx.params.id;
+    await orderService.deleteItem(itemId);
+    ctx.status = 200;
   });
 };

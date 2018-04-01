@@ -1,5 +1,5 @@
 import { connector } from '../bot';
 
-export default server => {
-  server.post("/api/messages", connector.listen());
+export default router => {
+  router.post("/api/messages", connector.listen());
 }
