@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "nodemon server.js --inspect --exec babel-node --presets es2015",
-    "build": "babel lib -d dist",
+    "build": "babel server.js -d dist",
     "serve": "node dist/index.js",
     "test": "mocha --compilers js:babel-core/register --timeout 10000"
   },
@@ -27,13 +27,14 @@
     "nodemon": "^1.11.0"
   },
   "dependencies": {
+    "@koa/cors": "^2.2.1",
+    "botbuilder": "^3.14.1",
     "botbuilder-azure": "^3.0.4",
+    "documentdb-q-promises": "^1.6.0",
+    "dotenv": "^5.0.1",
     "koa": "^2.5.0",
     "koa-body": "^2.5.0",
     "koa-router": "^7.4.0",
-    "uuid": "^3.2.1",
-    "dotenv": "^5.0.1",
-    "botbuilder": "^3.14.1",
-    "documentdb-q-promises": "^1.6.0"
+    "uuid": "^3.2.1"
   }
 }

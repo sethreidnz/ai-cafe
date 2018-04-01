@@ -9,6 +9,8 @@ import "bulma/css/bulma.css";
 
 import { Navbar } from "./components/Navbar";
 import { Orders } from "./orders";
+import { Reservations } from "./reservations";
+import { Bot } from "./bot";
 
 class App extends Component {
   state = {
@@ -20,7 +22,7 @@ class App extends Component {
     });
   }
   render() {
-    const { hasLoaded, cognitiveServicesConfig } = this.state;
+    const { hasLoaded } = this.state;
     if (!hasLoaded) return <div />;
     return (
       <Router>
@@ -29,7 +31,9 @@ class App extends Component {
           <section>
             <div className="container">
               <Switch>
-                <Redirect exact from="/" to="/orders" />
+                <Redirect exact from="/" to="/bot" />
+                <Route path="/bot" component={Bot} />
+                <Route path="/reservations" component={Reservations} />
                 <Route path="/orders" component={Orders} />
               </Switch>
             </div>

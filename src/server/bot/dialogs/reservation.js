@@ -10,14 +10,14 @@ const registerReservationDialog = bot => {
       if (!reservationDate) {
         builder.Prompts.time(session, "Yes I can make a booking for you. What time would you like to book?");
       } else {
-        session.dialogData.reservation.reservationDate = reservationDate;
+        session.dialogData.reservation.date = reservationDate;
         next();
       }
     },
     (session, results) => {
       if (!session.dialogData.reservation.reservationDate) {
         const reservationDate = builder.EntityRecognizer.parseTime(results.response.entity);
-        session.dialogData.reservation.reservationDate = reservationDate;
+        session.dialogData.reservation.date = reservationDate;
       }
       builder.Prompts.number(session, "How many people in your group?");
     },
@@ -26,10 +26,10 @@ const registerReservationDialog = bot => {
       builder.Prompts.text(session, `Can I have a name for the booking?`);
     },
     (session, results) => {
-      session.dialogData.reservation.bookingName = results.response;
+      session.dialogData.reservation.name = results.response;
       const reservationDetails = session.dialogData.reservation;
       reservationService.addItem(reservationDetails);
-      builder.Prompts.text(session, `Thanks ${session.dialogData.bookingName} we'll make a booking for ${session.dialogData.groupSize} people, on ${session.dialogData.reservationDate}.`);
+      builder.Prompts.text(session, `Thanks ${reservationDetails.name} we'll make a booking for ${reservationDetails.groupSize} people, on ${reservationDetails.date}.`);
       session.endDialog();
     }
   ]);
