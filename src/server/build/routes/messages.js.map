@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../src/routes/messages.js"],"names":["router","post","listen"],"mappings":";;;;;;AAAA;;kBAEe,kBAAU;AACvBA,SAAOC,IAAP,CAAY,eAAZ,EAA6B,eAAUC,MAAV,EAA7B;AACD,C","file":"messages.js","sourcesContent":["import { connector } from '../bot';\r\n\r\nexport default router => {\r\n  router.post(\"/api/messages\", connector.listen());\r\n}"]}
