@@ -4,10 +4,10 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon src/server.js --inspect --exec babel-node --presets es2015",
+    "serve": "nodemon src/server.js --inspect --exec babel-node --presets es2015",
     "prebuild": "npm run clean",
     "build": "babel -d ./build ./src -s",
-    "serve": "node build/server.js",
+    "start": "node build/server.js",
     "test": "mocha --compilers js:babel-core/register --timeout 10000",
     "clean": "rm -rf build && mkdir build"
   },
