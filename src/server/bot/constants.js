@@ -1,7 +1,9 @@
 const DIALOG_NAMES = {
   START: "start",
   RESERVATION: "reservation",
-  ORDER: "order"
+  SELECT_ORDER: "selectOrder",
+  ORDER_COFFEE: "orderCoffee",
+  ORDER_FOOD: "orderFood"
 };
 
 const INTENT_NAMES = {
@@ -10,6 +12,11 @@ const INTENT_NAMES = {
   ORDER: "Order",
   START_OVER: "Utilities.StartOver",
   CANCEL: "Utilities.Cancel"
+};
+
+const ACTION_NAMES = {
+  ORDER_COFFEE: "OrderCoffee",
+  ORDER_FOOD: "OrderFood"
 };
 
 const ENTITY_NAMES = {
@@ -21,5 +28,6 @@ const ENTITY_NAMES = {
 module.exports = {
   DIALOG_NAMES,
   INTENT_NAMES,
-  ENTITY_NAMES
+  ENTITY_NAMES,
+  ACTION_NAMES
 }

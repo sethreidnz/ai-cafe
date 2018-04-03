@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Logo from "./Logo.png";
 
 export const Navbar = () => (
   <nav className="navbar is-black">
@@ -29,9 +28,6 @@ export const Navbar = () => (
           </Link>
           <Link className="navbar-item" to="/orders">
             Orders
-          </Link>
-          <Link className="navbar-item" to="/reviews">
-            Reviews
           </Link>
         </div>
       </div>

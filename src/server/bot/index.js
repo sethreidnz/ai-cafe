@@ -42,8 +42,8 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
 .matches(INTENT_NAMES.GREETING, (session) => {
     session.beginDialog(DIALOG_NAMES.START);
 })
-.matches(INTENT_NAMES.ORDER, (session) => {
-    session.send('You reached Order intent, you said \'%s\'.', session.message.text);
+.matches(INTENT_NAMES.ORDER, (session, args) => {
+    session.beginDialog(DIALOG_NAMES.SELECT_ORDER, args);
 })
 .matches(INTENT_NAMES.RESERVATION, (session, args) => {
     session.beginDialog(DIALOG_NAMES.RESERVATION, args);

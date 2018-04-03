@@ -1,17 +1,25 @@
 import React, { Component } from "react";
+import moment from 'moment'
+import { getAllOrders } from "../api/reservations";
 import "./Orders.css";
 
-import { orders } from "./constants";
 import { PageTitle } from "../components/PageTitle";
 
 export class Orders extends Component {
   state = {
     hasLoaded: false,
-    orders: orders
+    orders: null
   };
-  async componentDidMount() {}
+  async componentDidMount() {
+    const orders = await getAllOrders();
+    this.setState({
+      hasLoaded: true,
+      orders
+    });
+  }
   render() {
     const { hasLoaded, orders } = this.state;
+    if (!hasLoaded) return <div />;
     return (
       <div className="orders container">
         <PageTitle text="Pending Orders" />
@@ -28,7 +36,9 @@ export class Orders extends Component {
               <tbody>
                 {orders.map(order => (
                   <tr>
-                    <td>{order.time.toLocaleDateString()}, {order.time.toLocaleTimeString()}</td>
+                    <td>
+                      {moment(order.pickupTime).format('MMMM Do YYYY, h:mm:ss a')}
+                    </td>
                     <td>{order.name}</td>
                     <td>{order.order}</td>
                   </tr>

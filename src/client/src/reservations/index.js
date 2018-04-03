@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import moment from 'moment';
 import { getAllReservations } from "../api/reservations";
 import "./Reservations.css";
 
@@ -34,16 +35,24 @@ export class Reservations extends Component {
                 </tr>
               </thead>
               <tbody>
-                {reservations.length > 0 ? reservations.map(reservation => (
-                  <tr>
-                    <td>{reservation.name}</td>
-                    <td>{reservation.groupSize}</td>
-                    <td>
-                      {reservation.date.toLocaleDateString()},{" "}
-                      {reservation.date.toLocaleTimeString()}
-                    </td>
-                  </tr>
-                )): <NoResultsRow text="There are no reservations yet" colSpan={3} />}
+                {reservations.length > 0 ? (
+                  reservations.map(reservation => (
+                    <tr>
+                      <td>{reservation.name}</td>
+                      <td>{reservation.groupSize}</td>
+                      <td>
+                        {moment(reservation.date).format(
+                          "MMMM Do YYYY, h:mm:ss a"
+                        )}
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  <NoResultsRow
+                    text="There are no reservations yet"
+                    colSpan={3}
+                  />
+                )}
               </tbody>
             </table>
           </div>

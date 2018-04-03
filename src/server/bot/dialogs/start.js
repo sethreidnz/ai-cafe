@@ -14,7 +14,7 @@ const registerStartDialog = bot => {
       builder.Prompts.choice(
           session,
           `Welcome to the A.I. Cafe. What would you like to do?`,
-          `${OPTIONS.RESERVATION}|${OPTIONS.ORDER}|${OPTIONS.REVIEW}`,
+          `${OPTIONS.RESERVATION}|${OPTIONS.ORDER}`,
           { listStyle: builder.ListStyle.button }
       );
     },
@@ -26,7 +26,7 @@ const registerStartDialog = bot => {
           break;
         }
         case OPTIONS.ORDER: {
-          session.replaceDialog(DIALOG_NAMES.ORDER);
+          session.replaceDialog(DIALOG_NAMES.SELECT_ORDER);
           break;
         }
         case OPTIONS.REVIEW: {
