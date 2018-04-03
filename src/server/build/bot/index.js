@@ -11,7 +11,7 @@ var _dotenv2 = _interopRequireDefault(_dotenv);
 
 var _contants = require('../database/contants');
 
-var _reservation = require('./dialogs/reservation');
+var _constants = require('./constants');
 
 var _dialogs = require('./dialogs');
 
@@ -58,16 +58,17 @@ var LuisModelUrl = 'https://westus.api.cognitive.microsoft.com/luis/v2.0/apps/' 
 
 // Main dialog with LUIS
 var recognizer = new builder.LuisRecognizer(LuisModelUrl);
-var intents = new builder.IntentDialog({ recognizers: [recognizer] }).matches('Greeting', function (session) {
-    session.send('You reached Greeting intent, you said \'%s\'.', session.message.text);
-}).matches('Order', function (session) {
+var intents = new builder.IntentDialog({ recognizers: [recognizer] }).matches(_constants.INTENT_NAMES.GREETING, function (session) {
+    session.beginDialog(_constants.DIALOG_NAMES.START);
+}).matches(_constants.INTENT_NAMES.ORDER, function (session) {
     session.send('You reached Order intent, you said \'%s\'.', session.message.text);
-}).matches('Booking', function (session, args) {
-    session.beginDialog(_reservation.RESERVATION_DIALOG_NAME, args);
-}).matches('Utilities.StartOver', function (session) {
-    session.send('You reached StartOver intent, you said \'%s\'.', session.message.text);
-}).matches('Utilities.Cancel', function (session) {
-    session.send('You reached Cancel intent, you said \'%s\'.', session.message.text);
+}).matches(_constants.INTENT_NAMES.RESERVATION, function (session, args) {
+    session.beginDialog(_constants.DIALOG_NAMES.RESERVATION, args);
+}).matches(_constants.INTENT_NAMES.START_OVER, function (session) {
+    session.send("Alright let's start over", session.message.text);
+    session.beginDialog(_constants.DIALOG_NAMES.START, args);
+}).matches(_constants.INTENT_NAMES.CANCEL, function (session) {
+    session.send("Alright I'll cancel your request", session.message.text);
 }).onDefault(function (session) {
     session.send('Sorry, I did not understand \'%s\'.', session.message.text);
 });

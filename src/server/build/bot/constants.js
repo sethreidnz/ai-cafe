@@ -4,13 +4,17 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 var DIALOG_NAMES = exports.DIALOG_NAMES = {
-  BOOKING: "booking",
+  START: "start",
+  RESERVATION: "reservation",
   ORDER: "order"
 };
 
 var INTENT_NAMES = exports.INTENT_NAMES = {
-  BOOKING: "booking",
-  ORDER: "order"
+  GREETING: "Greeting",
+  RESERVATION: "Booking",
+  ORDER: "Order",
+  START_OVER: "Utilities.StartOver",
+  CANCEL: "Utilities.Cancel"
 };
 
 var ENTITY_NAMES = exports.ENTITY_NAMES = {
