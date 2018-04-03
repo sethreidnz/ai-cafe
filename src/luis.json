@@ -1,0 +1,353 @@
+{
+  "luis_schema_version": "2.2.0",
+  "versionId": "0.1",
+  "name": "ai-cafe",
+  "desc": "AI Cafe bot for ordering and dealing with the AI Cafe",
+  "culture": "en-us",
+  "intents": [
+    {
+      "name": "Booking"
+    },
+    {
+      "name": "Greeting"
+    },
+    {
+      "name": "None"
+    },
+    {
+      "name": "Order"
+    },
+    {
+      "name": "Utilities.Cancel",
+      "inherits": {
+        "domain_name": "Utilities",
+        "model_name": "Cancel"
+      }
+    },
+    {
+      "name": "Utilities.StartOver",
+      "inherits": {
+        "domain_name": "Utilities",
+        "model_name": "StartOver"
+      }
+    }
+  ],
+  "entities": [
+    {
+      "name": "GroupSize"
+    },
+    {
+      "name": "Product"
+    }
+  ],
+  "composites": [],
+  "closedLists": [],
+  "regex_entities": [],
+  "bing_entities": [
+    "datetimeV2"
+  ],
+  "model_features": [],
+  "regex_features": [],
+  "utterances": [
+    {
+      "text": "can i book for this morning at 10am",
+      "intent": "Booking",
+      "entities": []
+    },
+    {
+      "text": "can i make a booking",
+      "intent": "Booking",
+      "entities": []
+    },
+    {
+      "text": "can i make a booking for 2 people",
+      "intent": "Booking",
+      "entities": [
+        {
+          "entity": "GroupSize",
+          "startPos": 25,
+          "endPos": 32
+        }
+      ]
+    },
+    {
+      "text": "can i make a booking for 3 at 10am tomorrow?",
+      "intent": "Booking",
+      "entities": [
+        {
+          "entity": "GroupSize",
+          "startPos": 25,
+          "endPos": 25
+        }
+      ]
+    },
+    {
+      "text": "can i make a booking for 8pm today",
+      "intent": "Booking",
+      "entities": []
+    },
+    {
+      "text": "can i make a booking for tuesday 2nd of march",
+      "intent": "Booking",
+      "entities": []
+    },
+    {
+      "text": "can i make an order",
+      "intent": "Order",
+      "entities": []
+    },
+    {
+      "text": "can i order a coffee",
+      "intent": "Order",
+      "entities": [
+        {
+          "entity": "Product",
+          "startPos": 14,
+          "endPos": 19
+        }
+      ]
+    },
+    {
+      "text": "can i order a sandwich",
+      "intent": "Order",
+      "entities": [
+        {
+          "entity": "Product",
+          "startPos": 14,
+          "endPos": 21
+        }
+      ]
+    },
+    {
+      "text": "can i order something",
+      "intent": "Order",
+      "entities": []
+    },
+    {
+      "text": "can you restart for me ?",
+      "intent": "Utilities.StartOver",
+      "entities": []
+    },
+    {
+      "text": "cancel",
+      "intent": "Utilities.Cancel",
+      "entities": []
+    },
+    {
+      "text": "cancel brawl",
+      "intent": "Utilities.Cancel",
+      "entities": []
+    },
+    {
+      "text": "cancel expanse",
+      "intent": "Utilities.Cancel",
+      "entities": []
+    },
+    {
+      "text": "cancel it",
+      "intent": "Utilities.Cancel",
+      "entities": []
+    },
+    {
+      "text": "cancel navigation",
+      "intent": "Utilities.Cancel",
+      "entities": []
+    },
+    {
+      "text": "cancel silent hours",
+      "intent": "Utilities.Cancel",
+      "entities": []
+    },
+    {
+      "text": "delete that and start again",
+      "intent": "Utilities.StartOver",
+      "entities": []
+    },
+    {
+      "text": "do you have a table available next tuesday?",
+      "intent": "Booking",
+      "entities": []
+    },
+    {
+      "text": "do you have a table for 3 at 3pm tomorrow",
+      "intent": "Booking",
+      "entities": [
+        {
+          "entity": "GroupSize",
+          "startPos": 24,
+          "endPos": 24
+        }
+      ]
+    },
+    {
+      "text": "do you have any bookings available",
+      "intent": "Booking",
+      "entities": []
+    },
+    {
+      "text": "do you sell coffee",
+      "intent": "Order",
+      "entities": [
+        {
+          "entity": "Product",
+          "startPos": 12,
+          "endPos": 17
+        }
+      ]
+    },
+    {
+      "text": "good morning",
+      "intent": "Greeting",
+      "entities": []
+    },
+    {
+      "text": "greetings",
+      "intent": "Greeting",
+      "entities": []
+    },
+    {
+      "text": "have you got any tables available",
+      "intent": "Booking",
+      "entities": []
+    },
+    {
+      "text": "hello",
+      "intent": "Greeting",
+      "entities": []
+    },
+    {
+      "text": "hi",
+      "intent": "Greeting",
+      "entities": []
+    },
+    {
+      "text": "hows it going",
+      "intent": "Greeting",
+      "entities": []
+    },
+    {
+      "text": "i need to begin over and restart",
+      "intent": "Utilities.StartOver",
+      "entities": []
+    },
+    {
+      "text": "i need to make an order",
+      "intent": "Order",
+      "entities": []
+    },
+    {
+      "text": "i want to cancel",
+      "intent": "Utilities.Cancel",
+      "entities": []
+    },
+    {
+      "text": "i want to do restart",
+      "intent": "Utilities.StartOver",
+      "entities": []
+    },
+    {
+      "text": "i want to stop",
+      "intent": "Utilities.Cancel",
+      "entities": []
+    },
+    {
+      "text": "i would like a muffin",
+      "intent": "Order",
+      "entities": [
+        {
+          "entity": "Product",
+          "startPos": 15,
+          "endPos": 20
+        }
+      ]
+    },
+    {
+      "text": "i would like to come in today",
+      "intent": "Booking",
+      "entities": []
+    },
+    {
+      "text": "i would like to make a booking in 30 minutes",
+      "intent": "Booking",
+      "entities": []
+    },
+    {
+      "text": "i would like to order a coffee",
+      "intent": "Order",
+      "entities": [
+        {
+          "entity": "Product",
+          "startPos": 24,
+          "endPos": 29
+        }
+      ]
+    },
+    {
+      "text": "i would like to purchase a flat white",
+      "intent": "Order",
+      "entities": [
+        {
+          "entity": "Product",
+          "startPos": 27,
+          "endPos": 36
+        }
+      ]
+    },
+    {
+      "text": "i would like to purchase a long black",
+      "intent": "Order",
+      "entities": [
+        {
+          "entity": "Product",
+          "startPos": 27,
+          "endPos": 36
+        }
+      ]
+    },
+    {
+      "text": "i'd like to order something",
+      "intent": "Order",
+      "entities": []
+    },
+    {
+      "text": "let ' s restart",
+      "intent": "Utilities.StartOver",
+      "entities": []
+    },
+    {
+      "text": "let me start it again from scratch",
+      "intent": "Utilities.StartOver",
+      "entities": []
+    },
+    {
+      "text": "no thank you",
+      "intent": "Utilities.Cancel",
+      "entities": []
+    },
+    {
+      "text": "not tomorrow please",
+      "intent": "Utilities.Cancel",
+      "entities": []
+    },
+    {
+      "text": "please do restarting",
+      "intent": "Utilities.StartOver",
+      "entities": []
+    },
+    {
+      "text": "please restart the search",
+      "intent": "Utilities.StartOver",
+      "entities": []
+    },
+    {
+      "text": "restart please",
+      "intent": "Utilities.StartOver",
+      "entities": []
+    },
+    {
+      "text": "wait never mind i just told you never mind",
+      "intent": "Utilities.Cancel",
+      "entities": []
+    }
+  ]
+}
