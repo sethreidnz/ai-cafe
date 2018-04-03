@@ -14,10 +14,15 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "prebuild": "npm run delete-files",
     "build": "react-scripts build",
     "postbuild": "npm run copyfiles",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "copyfiles": "copyfiles -u 1 build/**/* ../server/build/wwwroot"
+    "copyfiles": "copyfiles -u 1 build/**/* ../server/wwwroot",
+    "delete-files": "del-cli ../server/wwwroot -f"
+  },
+  "devDependencies": {
+    "del-cli": "^1.1.0"
   }
 }

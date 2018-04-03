@@ -1,5 +1,5 @@
 .env.local
-build/
+src/server/wwwroot/
 
 # Created by https://www.gitignore.io/api/node,visualstudiocode
 
