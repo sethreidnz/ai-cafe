@@ -1,5 +1,5 @@
 .env.local
-src/server/wwwroot/
+src/server/public/
 
 # Created by https://www.gitignore.io/api/node,visualstudiocode
 
