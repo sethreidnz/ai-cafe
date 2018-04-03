@@ -1,7 +1,7 @@
-import { ChatConnector } from 'botbuilder';
-import { Middleware } from 'koa';
+const { ChatConnector } = require('botbuilder');
+const { Middleware } = require('koa');
 
-export class KoaChatConnector extends ChatConnector {
+module.exports = class KoaChatConnector extends ChatConnector {
     listen() {
         const _listen = super.listen();
 

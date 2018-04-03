@@ -1,10 +1,10 @@
-export const DIALOG_NAMES = {
+const DIALOG_NAMES = {
   START: "start",
   RESERVATION: "reservation",
   ORDER: "order"
 };
 
-export const INTENT_NAMES = {
+const INTENT_NAMES = {
   GREETING: "Greeting",
   RESERVATION: "Booking",
   ORDER: "Order",
@@ -12,9 +12,14 @@ export const INTENT_NAMES = {
   CANCEL: "Utilities.Cancel"
 };
 
-export const ENTITY_NAMES = {
+const ENTITY_NAMES = {
   DATE_TIME: "builtin.datetimeV2.datetime",
   PRODUCT: "Product",
   GROUP_SIZE: "GroupSize"
 };
 
+module.exports = {
+  DIALOG_NAMES,
+  INTENT_NAMES,
+  ENTITY_NAMES
+}

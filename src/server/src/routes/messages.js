@@ -1,5 +1,5 @@
-import { connector } from '../bot';
+const connector = require('../bot');
 
-export default router => {
+module.exports = router => {
   router.post("/api/messages", connector.listen());
 }

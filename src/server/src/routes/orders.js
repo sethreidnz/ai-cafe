@@ -1,7 +1,7 @@
 const uuidv4 = require("uuid/v4");
 const { orderService } = require("../database");
 
-export default router => {
+module.exports = router => {
   router.get('/api/orders', async (ctx, next) => {
     const allOrders = await orderService.getAll("SELECT * FROM Orders");
     ctx.body = allOrders

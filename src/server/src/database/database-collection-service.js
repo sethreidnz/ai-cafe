@@ -1,6 +1,6 @@
 const uuidv4 = require("uuid/v4");
 
-export class DatabaseCollectionService {
+module.exports = class DatabaseCollectionService {
   constructor(documentClient, databaseId, collectionId) {
     this.documentClient = documentClient;
     this.databaseId = databaseId;

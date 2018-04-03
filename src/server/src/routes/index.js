@@ -1,8 +1,8 @@
-import orders from './orders';
-import messages from './messages';
-import reservations from './reservations';
+const orders = require('./orders');
+const messages = require('./messages');
+const reservations = require('./reservations');
 
-export default (router) => {
+module.exports = (router) => {
   messages(router);
   orders(router);
   reservations(router);

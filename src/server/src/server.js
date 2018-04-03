@@ -1,8 +1,8 @@
-import Koa from 'koa';
-import koaBody from 'koa-body';
-import cors from '@koa/cors';
-import KoaRouter from 'koa-router';
-import createRoutes from './routes';
+const Koa = require('koa');
+const koaBody = require('koa-body');
+const cors = require('@koa/cors');
+const KoaRouter = require('koa-router');
+const createRoutes = require('./routes');
 
 // configure the routes
 const router = new KoaRouter();

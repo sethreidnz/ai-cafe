@@ -4,19 +4,11 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "serve": "nodemon src/server.js --inspect --exec babel-node --presets es2015",
-    "prebuild": "npm run clean",
-    "build": "babel -d ./build ./src -s",
-    "start": "node build/server.js",
-    "clean": "rm -rf build && mkdir build"
+    "start": "nodemon src/server.js --inspect5"
   },
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-core": "^6.23.1",
-    "babel-preset-env": "^1.6.1",
-    "babel-register": "^6.23.0",
     "eslint": "^3.19.0",
     "eslint-config-standard": "^11.0.0",
     "eslint-plugin-import": "^2.9.0",

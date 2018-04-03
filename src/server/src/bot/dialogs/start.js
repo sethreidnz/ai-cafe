@@ -1,6 +1,6 @@
 const builder = require("botbuilder");
-import { reservationService } from "../../database";
-import { DIALOG_NAMES } from "../constants";
+const { reservationService } = require("../../database");
+const { DIALOG_NAMES } = require("../constants");
 
 const OPTIONS = {
   RESERVATION: "Make a reservation",
@@ -37,4 +37,4 @@ const registerStartDialog = bot => {
     }
   ])}
 
-export default registerStartDialog;
+module.exports  = registerStartDialog;

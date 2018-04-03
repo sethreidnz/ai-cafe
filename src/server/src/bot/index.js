@@ -1,11 +1,11 @@
 var builder = require('botbuilder');
 var azure = require('botbuilder-azure'); 
-import dotenv from 'dotenv';
+const dotenv = require('dotenv');
 dotenv.config()
-import { DATABASE_NAME, BOT_DATA_COLLECTION_NAME } from '../database/contants'
-import { INTENT_NAMES, DIALOG_NAMES } from './constants';
-import createDialogs from './dialogs';
-import { KoaChatConnector } from './koa-chat-connector';
+const { DATABASE_NAME, BOT_DATA_COLLECTION_NAME } = require('../database/contants');
+const { INTENT_NAMES, DIALOG_NAMES } = require('./constants');
+const createDialogs = require('./dialogs');
+const KoaChatConnector = require('./koa-chat-connector');
 
 var documentDbOptions = {
     host: process.env.COSMOSDB_HOST, 
@@ -15,7 +15,7 @@ var documentDbOptions = {
 };
 
 // Configure the connector
-export const connector = new KoaChatConnector({
+const connector = new KoaChatConnector({
   appId: process.env.MicrosoftAppId,
   appPassword: process.env.MicrosoftAppPassword
 });
@@ -62,4 +62,4 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
 bot.dialog('/', intents); 
 createDialogs(bot);  
 
-
+module.exports = connector;

@@ -1,9 +1,9 @@
-import registerReservationDialog from './reservation';
-import registerStartDialog from './start';
+const registerReservationDialog = require('./reservation');
+const registerStartDialog = require('./start');
 
 const createDialogs = (bot) => {
   registerReservationDialog(bot);
   registerStartDialog(bot);
 }
 
-export default createDialogs;
+module.exports = createDialogs;
