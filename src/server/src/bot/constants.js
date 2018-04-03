@@ -1,11 +1,15 @@
 export const DIALOG_NAMES = {
-  BOOKING: "booking",
+  START: "start",
+  RESERVATION: "reservation",
   ORDER: "order"
 };
 
 export const INTENT_NAMES = {
-  BOOKING: "booking",
-  ORDER: "order"
+  GREETING: "Greeting",
+  RESERVATION: "Booking",
+  ORDER: "Order",
+  START_OVER: "Utilities.StartOver",
+  CANCEL: "Utilities.Cancel"
 };
 
 export const ENTITY_NAMES = {
