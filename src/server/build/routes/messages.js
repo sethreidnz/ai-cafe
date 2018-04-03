@@ -1,12 +1,6 @@
-"use strict";
+import { connector } from '../bot';
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
+export default (router => {
+  router.post("/api/messages", connector.listen());
 });
-
-var _bot = require("../bot");
-
-exports.default = function (router) {
-  router.post("/api/messages", _bot.connector.listen());
-};
 //# sourceMappingURL=messages.js.map

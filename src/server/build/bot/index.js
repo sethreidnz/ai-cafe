@@ -1,78 +1,58 @@
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.connector = undefined;
-
-var _dotenv = require('dotenv');
-
-var _dotenv2 = _interopRequireDefault(_dotenv);
-
-var _contants = require('../database/contants');
-
-var _constants = require('./constants');
-
-var _dialogs = require('./dialogs');
-
-var _dialogs2 = _interopRequireDefault(_dialogs);
-
-var _koaChatConnector = require('./koa-chat-connector');
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 var builder = require('botbuilder');
 var azure = require('botbuilder-azure');
-
-_dotenv2.default.config();
-
+import dotenv from 'dotenv';
+dotenv.config();
+import { DATABASE_NAME, BOT_DATA_COLLECTION_NAME } from '../database/contants';
+import { INTENT_NAMES, DIALOG_NAMES } from './constants';
+import createDialogs from './dialogs';
+import { KoaChatConnector } from './koa-chat-connector';
 
 var documentDbOptions = {
     host: process.env.COSMOSDB_HOST,
     masterKey: process.env.COSMOSDB_KEY,
-    database: _contants.DATABASE_NAME,
-    collection: _contants.BOT_DATA_COLLECTION_NAME
+    database: DATABASE_NAME,
+    collection: BOT_DATA_COLLECTION_NAME
 };
 
 // Configure the connector
-var connector = exports.connector = new _koaChatConnector.KoaChatConnector({
+export const connector = new KoaChatConnector({
     appId: process.env.MicrosoftAppId,
     appPassword: process.env.MicrosoftAppPassword
 });
 
 // Setup the bot with CosmosDB Storage
-var bot = new builder.UniversalBot(connector);
+const bot = new builder.UniversalBot(connector);
 var docDbClient = new azure.DocumentDbClient(documentDbOptions);
 var cosmosStorage = new azure.AzureBotStorage({ gzipData: false }, docDbClient);
 bot.set('storage', cosmosStorage);
 
 //configure LUIS
-var luisAppId = process.env.LuisAppId;
-var luisAPIKey = process.env.LuisAPIKey;
-var luisAPIHostName = process.env.LuisAPIHostName;
+const luisAppId = process.env.LuisAppId;
+const luisAPIKey = process.env.LuisAPIKey;
+const luisAPIHostName = process.env.LuisAPIHostName;
 if (!luisAppId || !luisAPIKey || !luisAPIHostName) {
     throw new Error("Required LUIS settings are not set.");
 }
 
-var LuisModelUrl = 'https://westus.api.cognitive.microsoft.com/luis/v2.0/apps/' + luisAppId + '?subscription-key=' + luisAPIKey;
+const LuisModelUrl = `https://westus.api.cognitive.microsoft.com/luis/v2.0/apps/${luisAppId}?subscription-key=${luisAPIKey}`;
 
 // Main dialog with LUIS
 var recognizer = new builder.LuisRecognizer(LuisModelUrl);
-var intents = new builder.IntentDialog({ recognizers: [recognizer] }).matches(_constants.INTENT_NAMES.GREETING, function (session) {
-    session.beginDialog(_constants.DIALOG_NAMES.START);
-}).matches(_constants.INTENT_NAMES.ORDER, function (session) {
+var intents = new builder.IntentDialog({ recognizers: [recognizer] }).matches(INTENT_NAMES.GREETING, session => {
+    session.beginDialog(DIALOG_NAMES.START);
+}).matches(INTENT_NAMES.ORDER, session => {
     session.send('You reached Order intent, you said \'%s\'.', session.message.text);
-}).matches(_constants.INTENT_NAMES.RESERVATION, function (session, args) {
-    session.beginDialog(_constants.DIALOG_NAMES.RESERVATION, args);
-}).matches(_constants.INTENT_NAMES.START_OVER, function (session) {
+}).matches(INTENT_NAMES.RESERVATION, (session, args) => {
+    session.beginDialog(DIALOG_NAMES.RESERVATION, args);
+}).matches(INTENT_NAMES.START_OVER, session => {
     session.send("Alright let's start over", session.message.text);
-    session.beginDialog(_constants.DIALOG_NAMES.START, args);
-}).matches(_constants.INTENT_NAMES.CANCEL, function (session) {
+    session.beginDialog(DIALOG_NAMES.START, args);
+}).matches(INTENT_NAMES.CANCEL, session => {
     session.send("Alright I'll cancel your request", session.message.text);
-}).onDefault(function (session) {
+}).onDefault(session => {
     session.send('Sorry, I did not understand \'%s\'.', session.message.text);
 });
 
 bot.dialog('/', intents);
-(0, _dialogs2.default)(bot);
+createDialogs(bot);
 //# sourceMappingURL=index.js.map
