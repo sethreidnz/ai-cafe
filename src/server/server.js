@@ -9,12 +9,13 @@ const router = new KoaRouter();
 createRoutes(router);
 
 // configure the app
+const port = process.env.PORT || 1337;
 var app = new Koa();
 app
   .use(cors())
   .use(koaBody())
   .use(router.routes())
   .use(router.allowedMethods())
-  .listen(5000);
+  .listen(port);
 
 module.exports = app;
