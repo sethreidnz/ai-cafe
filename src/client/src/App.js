@@ -31,10 +31,9 @@ class App extends Component {
           <section>
             <div className="container">
               <Switch>
-                <Redirect exact from="/" to="/bot" />
-                <Route path="/bot" component={Bot} />
-                <Route path="/reservations" component={Reservations} />
+                <Redirect exact from="/" to="/orders" />
                 <Route path="/orders" component={Orders} />
+                <Route path="/reservations" component={Reservations} />
               </Switch>
             </div>
           </section>

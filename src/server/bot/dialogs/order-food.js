@@ -33,8 +33,7 @@ const registerOrderFoodDialog = bot => {
     (session, results) => {
       session.dialogData.order.name = results.response;
       orderService.addItem(session.dialogData.order);
-      session.send(`Thank you ${session.dialogData.order.name} your order of ${session.dialogData.order.item} will be ready at ${moment(session.dialogData.order.pickupTime).format('MMMM Do YYYY, h:mm:ss a')}!`);
-      session.endDialog();
+      session.endConversation(`Thank you ${session.dialogData.order.name} your order of ${session.dialogData.order.item} will be ready at ${moment(session.dialogData.order.pickupTime).format('MMMM Do YYYY, h:mm:ss a')}!`);
     }
   ]);
 };

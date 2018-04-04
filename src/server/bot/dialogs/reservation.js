@@ -47,8 +47,7 @@ const registerReservationDialog = bot => {
       if (results.response.entity.toLowerCase() === "yes") {
         const reservationDetails = session.dialogData.reservation;
         reservationService.addItem(reservationDetails);
-        session.send("Thank you!.");
-        session.endDialog();
+        session.endConversation("Thank you!.");
       } else {
         session.send("Okay lets try again...");
         session.replaceDialog(DIALOG_NAMES.RESERVATION);
