@@ -40,7 +40,7 @@ export class Orders extends Component {
                       {moment(order.pickupTime).format('MMMM Do YYYY, h:mm:ss a')}
                     </td>
                     <td>{order.name}</td>
-                    <td>{order.order}</td>
+                    <td>{order.item}</td>
                   </tr>
                 ))}
               </tbody>
