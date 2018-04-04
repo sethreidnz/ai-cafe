@@ -20,8 +20,8 @@
     "postbuild": "npm run copyfiles",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "copyfiles": "copyfiles -u 1 build/**/* ../public/wwwroot",
-    "delete-files": "del-cli ../public/wwwroot -f"
+    "copyfiles": "copyfiles -u 1 build/**/* ../server/public",
+    "delete-files": "del-cli ../server/public -f"
   },
   "devDependencies": {
     "del-cli": "^1.1.0"
