@@ -6,6 +6,7 @@ import {
   Redirect
 } from "react-router-dom";
 import "bulma/css/bulma.css";
+import "botframework-webchat/botchat.css";
 
 import { Navbar } from "./components/Navbar";
 import { Orders } from "./orders";
@@ -31,7 +32,8 @@ class App extends Component {
           <section>
             <div className="container">
               <Switch>
-                <Redirect exact from="/" to="/orders" />
+                <Redirect exact from="/" to="/bot" />
+                <Route path="/bot" component={Bot} />
                 <Route path="/orders" component={Orders} />
                 <Route path="/reservations" component={Reservations} />
               </Switch>

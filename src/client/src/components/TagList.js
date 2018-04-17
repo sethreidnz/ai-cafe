@@ -3,8 +3,8 @@ import React from 'react';
 export const TagList = ({ values }) => {
   return (
     values.map(values => 
-      <div class="tags has-addons">
-        <span class="tag">{values}</span>
+      <div className="tags has-addons">
+        <span className="tag">{values}</span>
       </div>
     )
   )

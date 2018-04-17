@@ -1,7 +1,7 @@
 import React from "react";
 
 export const Notification = ({ type, text }) => (
-  <div class={`notification is-${type}`}>
+  <div className={`notification is-${type}`}>
     {text}
   </div>
 );

@@ -25,8 +25,8 @@ export class Reservations extends Component {
       <div className="orders container">
         <PageTitle text="Reservations" />
         <div className="columns">
-          <div class="column">
-            <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+          <div className="column">
+            <table className="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
               <thead>
                 <tr>
                   <th>Name</th>

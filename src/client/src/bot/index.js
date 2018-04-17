@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Chat } from "botframework-webchat";
-import "./Bot.css";
+import './Bot.css';
 
 const directLineSecret = process.env.REACT_APP_DIRECT_LINE;
 

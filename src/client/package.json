@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "botframework-webchat": "^0.12.0",
+    "botframework-webchat": "^0.12.1",
     "bulma": "^0.6.2",
     "classnames": "^2.2.5",
     "copyfiles": "^1.2.0",
@@ -25,5 +25,8 @@
   },
   "devDependencies": {
     "del-cli": "^1.1.0"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
   }
 }
